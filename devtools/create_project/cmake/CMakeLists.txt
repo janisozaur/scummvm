@@ -20,4 +20,4 @@ set(SOURCE_FILES
     )
 
 add_executable(create_project ${SOURCE_FILES})
-
+target_link_libraries(create_project rpcrt4)
