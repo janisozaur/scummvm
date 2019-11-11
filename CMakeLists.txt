@@ -6717,5 +6717,7 @@ if (WIN32)
 endif()
 
 target_link_directories(scummvm PUBLIC "c:/Users/User/Source/Repos/vcpkg/installed/arm64-windows/lib/")
+target_link_directories(scummvm PUBLIC "D:/a/vcpkg/vcpkg/installed/arm64-windows/lib/")
+target_link_directories(scummvm PUBLIC "D:/a/vcpkg/vcpkg/installed/x64-windows/lib/")
 set_property(TARGET scummvm PROPERTY CXX_STANDARD 11)
 set_property(TARGET scummvm PROPERTY CXX_STANDARD_REQUIRED ON)
