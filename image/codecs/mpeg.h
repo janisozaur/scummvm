@@ -30,7 +30,7 @@
 #include "graphics/pixelformat.h"
 
 extern "C" {
-	#include <mpeg2dec/mpeg2.h>
+	#include <libmpeg2/mpeg2.h>
 }
 
 namespace Common {
