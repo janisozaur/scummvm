@@ -5779,7 +5779,7 @@ add_library(zvision
 )
 
 endif()
-add_executable(scummvm
+add_executable(scummvm WIN32
 	./audio/decoders/3do.cpp
 	./audio/decoders/3do.h
 	./audio/decoders/aac.cpp
