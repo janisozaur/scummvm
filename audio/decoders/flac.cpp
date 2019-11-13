@@ -667,8 +667,7 @@ inline void FLACStream::callbackMetadata(const ::FLAC__StreamMetadata *metadata)
 }
 inline void FLACStream::callbackError(::FLAC__StreamDecoderErrorStatus status) {
 	// some of these are non-critical-Errors
-	debug(1, "FLACStream: An error occurred while decoding. DecoderState is: %s",
-			FLAC__StreamDecoderErrorStatusString[status]);
+	debug(1, "FLACStream: An error occurred while decoding. Reading DecoderState is not supported");
 }
 
 /* Static Callback Wrappers */
