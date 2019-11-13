@@ -45,6 +45,10 @@ Include(FindPNG)
 Find_Package(PNG REQUIRED)
 include_directories(${PNG_INCLUDE_DIRS})
 add_definitions(-DUSE_PNG)
+Include(FindMPEG2)
+Find_Package(MPEG2 REQUIRED)
+include_directories(${MPEG2_INCLUDE_DIRS})
+add_definitions(-DUSE_MPEG2)
 add_definitions(-DUSE_THEORADEC)
 Include(FindFreetype)
 Find_Package(Freetype REQUIRED)
@@ -72,6 +76,7 @@ add_definitions(-DUSE_GLES)
 add_definitions(-DUSE_TASKBAR)
 add_definitions(-DUSE_CLOUD)
 add_definitions(-DUSE_TRANSLATION)
+add_definitions(-DENABLE_VKEYBD)
 add_definitions(-DUSE_SYSDIALOGS)
 add_definitions(-DUSE_DETECTLANG)
 add_definitions(-DUSE_TTS)
@@ -6170,6 +6175,17 @@ add_executable(scummvm WIN32
 	./backends/timer/sdl/sdl-timer.h
 	./backends/updates/win32/win32-updates.cpp
 	./backends/updates/win32/win32-updates.h
+	./backends/vkeybd/image-map.cpp
+	./backends/vkeybd/image-map.h
+	./backends/vkeybd/keycode-descriptions.h
+	./backends/vkeybd/polygon.cpp
+	./backends/vkeybd/polygon.h
+	./backends/vkeybd/virtual-keyboard-gui.cpp
+	./backends/vkeybd/virtual-keyboard-gui.h
+	./backends/vkeybd/virtual-keyboard-parser.cpp
+	./backends/vkeybd/virtual-keyboard-parser.h
+	./backends/vkeybd/virtual-keyboard.cpp
+	./backends/vkeybd/virtual-keyboard.h
 	./backends/base-backend.cpp
 	./backends/base-backend.h
 	./backends/modular-backend.cpp
@@ -6614,6 +6630,8 @@ add_executable(scummvm WIN32
 	./image/codecs/indeo5.h
 	./image/codecs/mjpeg.cpp
 	./image/codecs/mjpeg.h
+	./image/codecs/mpeg.cpp
+	./image/codecs/mpeg.h
 	./image/codecs/msrle.cpp
 	./image/codecs/msrle.h
 	./image/codecs/msrle4.cpp
@@ -6705,6 +6723,7 @@ target_link_libraries(scummvm ogg)
 target_link_libraries(scummvm vorbisfile vorbis)
 target_link_libraries(scummvm FLAC)
 target_link_libraries(scummvm ${PNG_LIBRARIES})
+target_link_libraries(scummvm ${MPEG2_mpeg2_LIBRARY})
 target_link_libraries(scummvm theoradec)
 target_link_libraries(scummvm ${FREETYPE_LIBRARIES})
 target_link_libraries(scummvm ${JPEG_LIBRARIES})
