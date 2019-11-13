@@ -355,8 +355,7 @@ int FLACStream::readBuffer(int16 *buffer, const int numSamples) {
 		break;
 	default:
 		decoderOk = false;
-		warning("FLACStream: An error occurred while decoding. DecoderState is: %s",
-			FLAC__StreamDecoderStateString[getStreamDecoderState()]);
+		warning("FLACStream: An error occurred while decoding. Reading DecoderState not supported");
 	}
 
 	// Compute how many samples we actually produced
