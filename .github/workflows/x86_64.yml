@@ -1,0 +1,30 @@
+name: x86_64
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: create_project
+      run: |
+          git --no-pager show HEAD
+          cd devtools/create_project/cmake
+          mkdir build-arm64
+          cd build-arm64
+          cmake .. -A Arm64
+          cmake --build .
+          cd ../
+          mkdir build-x86_64
+          cd build-x86_64
+          cmake .. -A x64
+          cmake --build .
+          cd ..
+          mkdir build-arm
+          cd build-arm
+          cmake .. -A Arm
+          cmake --build .
+          cd ..
