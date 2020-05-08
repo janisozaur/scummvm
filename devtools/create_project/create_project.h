@@ -201,6 +201,14 @@ StringList getFeatureDefines(const FeatureList &features);
 StringList getFeatureLibraries(const FeatureList &features);
 
 /**
+ * Returns a list of all external library files, according to the
+ * feature passed.
+ *
+ * @param features Feature for the build (this may contain features, which are *not* enabled!)
+ */
+StringList getFeatureLibraries(const Feature& feature);
+
+/**
  * Sets the state of a given feature. This can be used to
  * either include or exclude an feature.
  *
@@ -242,18 +250,20 @@ struct BuildSetup {
 	StringList libraries; ///< List of all external libraries required for the build.
 	StringList testDirs;  ///< List of all folders containing tests
 
-	bool devTools;         ///< Generate project files for the tools
-	bool tests;            ///< Generate project files for the tests
-	bool runBuildEvents;   ///< Run build events as part of the build (generate revision number and copy engine/theme data & needed files to the build folder
-	bool createInstaller;  ///< Create installer after the build
-	bool useSDL2;          ///< Whether to use SDL2 or not.
+	bool devTools;             ///< Generate project files for the tools
+	bool tests;                ///< Generate project files for the tests
+	bool runBuildEvents;       ///< Run build events as part of the build (generate revision number and copy engine/theme data & needed files to the build folder
+	bool createInstaller;      ///< Create installer after the build
+	bool useSDL2;              ///< Whether to use SDL2 or not.
+	bool useCanonicalLibNames; ///< Whether to use canonical libraries names or default ones
 
 	BuildSetup() {
-		devTools        = false;
-		tests           = false;
-		runBuildEvents  = false;
-		createInstaller = false;
-		useSDL2         = true;
+		devTools             = false;
+		tests                = false;
+		runBuildEvents       = false;
+		createInstaller      = false;
+		useSDL2              = true;
+		useCanonicalLibNames = false;
 	}
 };
 
@@ -294,6 +304,15 @@ struct MSVCVersion {
 };
 typedef std::list<MSVCVersion> MSVCList;
 
+enum class MSVC_Architecture {
+	ARCH_ARM64,
+	ARCH_X86,
+	ARCH_AMD64
+};
+
+std::string getMSVCArchName(MSVC_Architecture arch);
+std::string getMSVCConfigName(MSVC_Architecture arch);
+
 /**
  * Creates a list of all supported versions of Visual Studio.
  *
@@ -315,6 +334,23 @@ const MSVCVersion *getMSVCVersion(int version);
  * @return Version number, or 0 if no installations were found.
  */
 int getInstalledMSVC();
+
+/**
+ * Return a "canonical" library name, so it is easier to integrate other providers of dependencies.
+ *
+ * @param lib The link library as provided by ScummVM libs.
+ * @return Canonical link library.
+ */
+std::string getCanonicalLibName(std::string lib);
+
+/**
+ * Removes given feature from setup.
+ *
+ * @param setup The setup to be processed.
+ * @param feature The feature to be removed
+ * @return A copy of setup less feature.
+ */
+BuildSetup removeFeatureFromSetup(BuildSetup setup, std::string feature);
 
 namespace CreateProjectTool {
 
