@@ -1,0 +1,23 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  windows:
+    name: Windows
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [win32, x64, arm64]
+      env:
+        CONFIGURATION: Release
+        PLATFORM: ${{ matrix.platform }}
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: vcpkg
+          uses: lukka/run-vcpkg@v2
+          with:
+            setupOnly: true
+        - name: Install vcpkg libs
+          run: |
+            $VCPKG_ROOT/vcpkg install zlib:%PLATFORM%-windows
