@@ -22,3 +22,5 @@ jobs:
       - name: Install vcpkg libs
         run: |
           echo $VCPKG_ROOT/vcpkg install zlib:$PLATFORM-windows
+          ls $VCPKG_ROOT
+          $VCPKG_ROOT/vcpkg --help
