@@ -20,4 +20,4 @@ jobs:
             setupOnly: true
         - name: Install vcpkg libs
           run: |
-            $VCPKG_ROOT/vcpkg install zlib:%PLATFORM%-windows
+            $VCPKG_ROOT/vcpkg install zlib
