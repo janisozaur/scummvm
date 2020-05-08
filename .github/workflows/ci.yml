@@ -21,6 +21,6 @@ jobs:
           vcpkgGitCommitId: d4a415b7fa3f0d0ea14a789d5778abfc666ef2d0
       - name: Install vcpkg libs
         run: |
-          echo $VCPKG_ROOT/vcpkg install zlib:$PLATFORM-windows
-          ls $VCPKG_ROOT
-          $VCPKG_ROOT/vcpkg --help
+          echo %VCPKG_ROOT%/vcpkg install zlib:%PLATFORM%-windows
+          ls %VCPKG_ROOT%
+          %VCPKG_ROOT%/vcpkg --help
