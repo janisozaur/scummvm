@@ -25,9 +25,12 @@ jobs:
       - name: ls vcpkg
         run: |
           ls ${env:VCPKG_ROOT}
+      - name: vcpkg empty
+        run: |
+          ${env:VCPKG_ROOT}\vcpkg.exe
       - name: vcpkg help
         run: |
-          ${env:VCPKG_ROOT}/vcpkg.exe --help
+          ${env:VCPKG_ROOT}\vcpkg.exe --help
       - name: Install vcpkg libs
         run: |
           ${env:VCPKG_ROOT}/vcpkg.exe install zlib:${env:PLATFORM}-windows
