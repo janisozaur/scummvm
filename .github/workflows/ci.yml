@@ -24,4 +24,4 @@ jobs:
           echo ${env:VCPKG_ROOT}/vcpkg install zlib:${env:PLATFORM}-windows
           ls ${env:VCPKG_ROOT}
           ${env:VCPKG_ROOT}/vcpkg --help
-          ${env:VCPKG_ROOT}/vcpkg install zlib:${env.PLATFORM}-windows
+          ${env:VCPKG_ROOT}/vcpkg install zlib:${env:PLATFORM}-windows
