@@ -26,9 +26,6 @@ jobs:
       - name: ls vcpkg
         run: |
           ls $env:VCPKG_ROOT
-      - name: vcpkg empty
-        run: |
-          vcpkg.exe --version
       - name: vcpkg help
         run: |
           vcpkg.exe install zlib
