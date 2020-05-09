@@ -21,16 +21,16 @@ jobs:
           vcpkgGitCommitId: d4a415b7fa3f0d0ea14a789d5778abfc666ef2d0
       - name: test env
         run: |
-          echo ${env:VCPKG_ROOT}/vcpkg
+          echo $env:VCPKG_ROOT/vcpkg
       - name: ls vcpkg
         run: |
-          ls ${env:VCPKG_ROOT}
+          ls $env:VCPKG_ROOT
       - name: vcpkg empty
         run: |
-          ${env:VCPKG_ROOT}\vcpkg.exe
+          $env:VCPKG_ROOT\vcpkg.exe
       - name: vcpkg help
         run: |
-          ${env:VCPKG_ROOT}\vcpkg.exe --help
+          $env:VCPKG_ROOT\vcpkg.exe --help
       - name: Install vcpkg libs
         run: |
-          ${env:VCPKG_ROOT}/vcpkg.exe install zlib:${env:PLATFORM}-windows
+          $env:VCPKG_ROOT/vcpkg.exe install zlib:$env:PLATFORM-windows
