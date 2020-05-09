@@ -22,9 +22,12 @@ jobs:
       - name: test env
         run: |
           echo ${env:VCPKG_ROOT}/vcpkg
+      - name: ls vcpkg
+        run: |
+          ls ${env:VCPKG_ROOT}
+      - name: vcpkg help
+        run: |
+          ${env:VCPKG_ROOT}/vcpkg.exe --help
       - name: Install vcpkg libs
         run: |
-          echo ${env:VCPKG_ROOT}/vcpkg install zlib:${env:PLATFORM}-windows
-          ls ${env:VCPKG_ROOT}
-          ${env:VCPKG_ROOT}/vcpkg --help
-          ${env:VCPKG_ROOT}/vcpkg install zlib:${env:PLATFORM}-windows
+          ${env:VCPKG_ROOT}/vcpkg.exe install zlib:${env:PLATFORM}-windows
