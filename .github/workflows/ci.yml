@@ -27,7 +27,7 @@ jobs:
           ls $env:VCPKG_ROOT
       - name: vcpkg empty
         run: |
-          $env:VCPKG_ROOT\vcpkg.exe
+          $env:VCPKG_ROOT\vcpkg.exe --version
       - name: vcpkg help
         run: |
           $env:VCPKG_ROOT\vcpkg.exe --help
