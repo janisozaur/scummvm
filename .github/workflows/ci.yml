@@ -42,6 +42,3 @@ jobs:
       - name: vcpkg help
         run: |
           vcpkg.exe install zlib
-      - name: Install vcpkg libs
-        run: |
-          vcpkg.exe install zlib:$env:PLATFORM-windows
