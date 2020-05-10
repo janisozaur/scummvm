@@ -7,7 +7,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [win32, x64, arm64]
+        include:
+          - platform: win32
+            triplet: x86-windows
+            vcpkgPackages: 'zlib libpng fribidi'
+          - platform: x64
+            triplet: x64-windows
+            vcpkgPackages: 'zlib libpng fribidi'
+          - platform: arm64
+            triplet: arm64-windows
+            vcpkgPackages: 'zlib libpng'
     env:
       CONFIGURATION: Release
       PLATFORM: ${{ matrix.platform }}
@@ -16,9 +25,13 @@ jobs:
         uses: actions/checkout@v2
       - name: vcpkg
         uses: lukka/run-vcpkg@v2
+        id: runvcpkg
         with:
-          setupOnly: true
           vcpkgGitCommitId: d4a415b7fa3f0d0ea14a789d5778abfc666ef2d0
+          vcpkgTriplet: '${{ matrix.triplet }}'
+          vcpkgArguments: '${{ matrix.vcpkgPackages }}'
+      - name: Prints output of run-vcpkg's task
+        run: echo "root='${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}', triplet='${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_TRIPLET_OUT }}' "
       - name: test env
         run: |
           echo "::add-path::$env:VCPKG_ROOT"
