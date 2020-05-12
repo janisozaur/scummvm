@@ -43,9 +43,11 @@ jobs:
           cmake --build . -j 2
           ls
           cd ../../../
+      - name: Build create_project
+        run: |
           mkdir build-scummvm
           cd build-scummvm
-          devtools/create_project/cmake/Debug/create_project.exe . --msvc --enable-faad --enable-mpeg2
+          ../devtools/create_project/cmake/Debug/create_project.exe .. --msvc --enable-faad --enable-mpeg2
           ls
       - name: Build scummvm
         run: |
