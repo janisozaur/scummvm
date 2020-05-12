@@ -51,6 +51,7 @@ jobs:
           ls
       - name: Build scummvm
         run: |
+          cd build-scummvm
           ls
           echo msbuild scummvm.sln /p:Configuration=Release /p:Platform=${{ matrix.platform }}
           msbuild scummvm.sln /p:Configuration=Release /p:Platform=${{ matrix.platform }}
