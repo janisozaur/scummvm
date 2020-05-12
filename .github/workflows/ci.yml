@@ -38,7 +38,10 @@ jobs:
           echo $env:VCPKG_ROOT/vcpkg
       - name: Build create_project
         run: |
-          msbuild devtools/create_project/msvc/create_project.sln
+          cd devtools/create_project/cmake
+          cmake .
+          cmake --build . -j 2
+          ls
       - name: ls vcpkg
         run: |
           ls $env:VCPKG_ROOT
