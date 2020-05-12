@@ -47,7 +47,7 @@ jobs:
         run: |
           mkdir build-scummvm
           cd build-scummvm
-          ../devtools/create_project/cmake/Debug/create_project.exe .. --msvc --enable-faad --enable-mpeg2
+          ../devtools/create_project/cmake/Debug/create_project.exe .. --msvc --enable-faad --enable-mpeg2 --use-canonical-lib-names
           ls
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.0
