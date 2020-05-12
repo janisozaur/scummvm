@@ -36,6 +36,9 @@ jobs:
         run: |
           echo "::add-path::$env:VCPKG_ROOT"
           echo $env:VCPKG_ROOT/vcpkg
+      - name: Build create_project
+        run: |
+          msbuild devtools/create_project/msvc/create_project.sln
       - name: ls vcpkg
         run: |
           ls $env:VCPKG_ROOT
