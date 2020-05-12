@@ -42,9 +42,15 @@ jobs:
           cmake .
           cmake --build . -j 2
           ls
+          cd ../../../
           mkdir build-scummvm
           cd build-scummvm
-          ../Debug/create_project.exe ../../../../ --msvc --enable-faad --enable-mpeg2
+          devtools/create_project/cmake/Debug/create_project.exe . --msvc --enable-faad --enable-mpeg2
+          ls
+      - name: Build scummvm
+        run: |
+          ls
+          echo msbuild scummvm.sln /p:Configuration=Release /p:Platform=${{ matrix.platform }}
           msbuild scummvm.sln /p:Configuration=Release /p:Platform=${{ matrix.platform }}
       - name: ls vcpkg
         run: |
