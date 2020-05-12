@@ -43,7 +43,7 @@ jobs:
           cmake --build . -j 2
           ls
           cd ../../../
-      - name: Build create_project
+      - name: Call create_project
         run: |
           mkdir build-scummvm
           cd build-scummvm
