@@ -42,6 +42,10 @@ jobs:
           cmake .
           cmake --build . -j 2
           ls
+          mkdir build-scummvm
+          cd build-scummvm
+          ../Debug/create_project.exe ../../../../ --msvc --enable-faad --enable-mpeg2
+          msbuild scummvm.sln /p:Configuration=Release /p:Platform=${{ matrix.platform }}
       - name: ls vcpkg
         run: |
           ls $env:VCPKG_ROOT
