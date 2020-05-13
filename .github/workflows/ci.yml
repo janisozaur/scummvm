@@ -12,6 +12,7 @@ jobs:
             triplet: x86-windows
             arch: x86
             vcpkgPackages: 'curl faad2 fluidsynth freetype fribidi libflac libjpeg-turbo libmad libmpeg2 libogg libpng libtheora libvorbis sdl2 sdl2-net zlib'
+            useNasm: 'true'
           - platform: x64
             arch: x64
             triplet: x64-windows
@@ -26,6 +27,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - uses: ilammy/setup-nasm@v1
+        if: ${{ matrix.useNasm }} == 'true'
       - name: vcpkg
         uses: lukka/run-vcpkg@v2
         id: runvcpkg
