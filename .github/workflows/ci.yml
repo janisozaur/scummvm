@@ -47,7 +47,7 @@ jobs:
         run: |
           mkdir build-scummvm
           cd build-scummvm
-          ../devtools/create_project/cmake/Debug/create_project.exe .. --msvc --enable-faad --enable-mpeg2 --use-canonical-lib-names
+          ../devtools/create_project/cmake/Debug/create_project.exe .. --msvc --disable-nasm --disable-opengl --disable-opengles --use-canonical-lib-names
           ls
       - name: set scummvm_libs
         run: |
