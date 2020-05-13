@@ -69,16 +69,24 @@ jobs:
         run: |
           cd build-scummvm
           ls
-          echo msbuild scummvm.sln /p:Configuration=Release /p:Platform=${{ matrix.platform }}
           msbuild scummvm.sln /m /p:Configuration=Release /p:Platform=${{ matrix.platform }}
       - name: Upload scummvm
         uses: actions/upload-artifact@v2
         with:
           name: scummvm-${{ matrix.arch }}
-          path: build-scummvm/Release${{ matrix.arch }}
-      - name: ls vcpkg
-        run: |
-          ls $env:VCPKG_ROOT
-      - name: vcpkg help
-        run: |
-          vcpkg.exe install zlib
+          path: build-scummvm/Release${{ matrix.arch }}/*.exe
+      - name: Upload scummvm libs
+        uses: actions/upload-artifact@v2
+        with:
+          name: scummvm-${{ matrix.arch }}
+          path: ${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}\\installed\\${{ matrix.triplet }}\\bin\\*.dll
+      - name: Upload scummvm symbols
+        uses: actions/upload-artifact@v2
+        with:
+          name: symbols-${{ matrix.arch }}
+          path: build-scummvm/Release${{ matrix.arch }}/*.pdb
+      - name: Upload scummvm libs symbols
+        uses: actions/upload-artifact@v2
+        with:
+          name: symbols-${{ matrix.arch }}
+          path: ${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}\\installed\\${{ matrix.triplet }}\\bin\\*.pdb
