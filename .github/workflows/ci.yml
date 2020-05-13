@@ -10,11 +10,14 @@ jobs:
         include:
           - platform: win32
             triplet: x86-windows
+            arch: x86
             vcpkgPackages: 'curl faad2 fluidsynth freetype fribidi libflac libjpeg-turbo libmad libmpeg2 libogg libpng libtheora libvorbis sdl2 sdl2-net zlib'
           - platform: x64
+            arch: x64
             triplet: x64-windows
             vcpkgPackages: 'curl faad2 fluidsynth freetype fribidi libflac libjpeg-turbo libmad libmpeg2 libogg libpng libtheora libvorbis sdl2 sdl2-net zlib'
           - platform: arm64
+            arch: arm64
             triplet: arm64-windows
             vcpkgPackages: 'curl faad2 fluidsynth freetype libflac libjpeg-turbo libmad libmpeg2 libogg libpng libtheora libvorbis sdl2 sdl2-net zlib'
     env:
@@ -30,6 +33,11 @@ jobs:
           vcpkgGitCommitId: 2f7a104d4d6f1f3790db929f85a4086aa6973d7f
           vcpkgTriplet: '${{ matrix.triplet }}'
           vcpkgArguments: '${{ matrix.vcpkgPackages }}'
+      - name: Upload libs
+        uses: actions/upload-artifact@v2
+        with:
+          name: libs-${{ matrix.triplet }}
+          path: ${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}\\installed\\${{ matrix.triplet }}
       - name: Prints output of run-vcpkg's task
         run: echo "root='${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}', triplet='${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_TRIPLET_OUT }}' "
       - name: test env
@@ -47,7 +55,7 @@ jobs:
         run: |
           mkdir build-scummvm
           cd build-scummvm
-          ../devtools/create_project/cmake/Debug/create_project.exe .. --msvc --disable-nasm --disable-opengl --disable-opengles --use-canonical-lib-names
+          ../devtools/create_project/cmake/Debug/create_project.exe .. --msvc --enable-faad --enable-mpeg2 --use-canonical-lib-names
           ls
       - name: set scummvm_libs
         run: |
@@ -60,10 +68,11 @@ jobs:
           ls
           echo msbuild scummvm.sln /p:Configuration=Release /p:Platform=${{ matrix.platform }}
           msbuild scummvm.sln /m /p:Configuration=Release /p:Platform=${{ matrix.platform }}
-      - uses: actions/upload-artifact@v2
+      - name: Upload scummvm
+        uses: actions/upload-artifact@v2
         with:
-          name: my-artifact
-          path: build-scummvm
+          name: scummvm-${{ matrix.arch }}
+          path: build-scummvm/Release${{ matrix.arch }}
       - name: ls vcpkg
         run: |
           ls $env:VCPKG_ROOT
