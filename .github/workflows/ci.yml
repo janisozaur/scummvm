@@ -51,7 +51,7 @@ jobs:
           ls
       - name: set scummvm_libs
         run: |
-          echo "::set-env name=SCUMMVM_LIBS::${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}"
+          echo "::set-env name=SCUMMVM_LIBS::${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}\\installed\\${{ matrix.triplet }}"
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.0
       - name: Build scummvm
