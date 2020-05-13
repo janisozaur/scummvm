@@ -1195,6 +1195,7 @@ StringList getFeatureLibraries(const Feature &feature) {
 		StringList fLibraries = tokenize(feature.libraries);
 		libraries.splice(libraries.end(), fLibraries);
 	}
+	libraries.sort();
 
 	return libraries;
 }
@@ -1205,6 +1206,7 @@ StringList getFeatureLibraries(const FeatureList &features) {
 	for (FeatureList::const_iterator i = features.begin(); i != features.end(); ++i) {
 		libraries.merge(getFeatureLibraries(*i));
 	}
+	libraries.sort();
 
 	return libraries;
 }
