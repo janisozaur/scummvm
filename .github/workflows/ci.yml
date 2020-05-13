@@ -59,7 +59,11 @@ jobs:
           cd build-scummvm
           ls
           echo msbuild scummvm.sln /p:Configuration=Release /p:Platform=${{ matrix.platform }}
-          msbuild scummvm.sln /p:Configuration=Release /p:Platform=${{ matrix.platform }}
+          msbuild scummvm.sln /m /p:Configuration=Release /p:Platform=${{ matrix.platform }}
+      - uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: build-scummvm
       - name: ls vcpkg
         run: |
           ls $env:VCPKG_ROOT
